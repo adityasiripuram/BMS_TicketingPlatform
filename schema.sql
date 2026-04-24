@@ -1,0 +1,43 @@
+CREATE TABLE City (
+    CityID INT PRIMARY KEY AUTO_INCREMENT,
+    CityName VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Theatre (
+    TheatreID INT PRIMARY KEY AUTO_INCREMENT,
+    TheatreName VARCHAR(150) NOT NULL,
+    CityID INT,
+    Address VARCHAR(255),
+    FOREIGN KEY (CityID) REFERENCES City(CityID)
+);
+
+CREATE TABLE Screen (
+    ScreenID INT PRIMARY KEY AUTO_INCREMENT,
+    TheatreID INT,
+    ScreenName VARCHAR(50),
+    FOREIGN KEY (TheatreID) REFERENCES Theatre(TheatreID)
+);
+
+CREATE TABLE Movie (
+    MovieID INT PRIMARY KEY AUTO_INCREMENT,
+    MovieName VARCHAR(150) NOT NULL,
+    Language VARCHAR(50),
+    Format VARCHAR(20),
+    Duration INT
+);
+
+CREATE TABLE ShowTable (
+    ShowID INT PRIMARY KEY AUTO_INCREMENT,
+    MovieID INT,
+    ScreenID INT,
+    ShowDate DATE,
+    FOREIGN KEY (MovieID) REFERENCES Movie(MovieID),
+    FOREIGN KEY (ScreenID) REFERENCES Screen(ScreenID)
+);
+
+CREATE TABLE ShowTiming (
+    TimingID INT PRIMARY KEY AUTO_INCREMENT,
+    ShowID INT,
+    ShowTime TIME,
+    FOREIGN KEY (ShowID) REFERENCES ShowTable(ShowID)
+);
