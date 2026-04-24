@@ -1,0 +1,15 @@
+SELECT 
+    m.MovieName,
+    s.ShowDate,
+    st.ShowTime,
+    sc.ScreenName,
+    t.TheatreName
+FROM ShowTable s
+JOIN Movie m ON s.MovieID = m.MovieID
+JOIN Screen sc ON s.ScreenID = sc.ScreenID
+JOIN Theatre t ON sc.TheatreID = t.TheatreID
+JOIN ShowTiming st ON s.ShowID = st.ShowID
+WHERE 
+    t.TheatreID = 1
+    AND s.ShowDate = '2026-04-25'
+ORDER BY m.MovieName, st.ShowTime;
